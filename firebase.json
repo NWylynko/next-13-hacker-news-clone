@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "next-13-hacker-news-clone",
+    "source": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
