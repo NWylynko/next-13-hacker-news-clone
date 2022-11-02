@@ -20,12 +20,10 @@ export async function getStory(id: number) {
 
   const numOfComments = (story.kids ?? []).length
   const { host: domain } = new URL(story.url)
-  const time = HowLongAgo(story.time * 1000)
 
   return {
     ...story,
     numOfComments,
     domain,
-    time
   }
 }

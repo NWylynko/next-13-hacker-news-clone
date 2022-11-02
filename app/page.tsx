@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getStory } from "../lib/getStory";
 import { getTopStories } from "../lib/getTopStories";
+import { Time } from "./Time";
 
 export default async function Page() {
 
@@ -21,6 +22,10 @@ async function Item({ id, index }: { id: number, index: number }) {
 
   const story = await getStory(id);
 
+  const website = `https://news.ycombinator.com/from?site=${story.domain}`
+  const userUrl = `https://news.ycombinator.com/user?id=${story.by}`
+  const itemUrl = `https://news.ycombinator.com/item?id=${id}`
+
   return (
     <div style={{ margin: 8 }}>
       <div style={{ display: "flex", gap: 8 }}>
@@ -30,14 +35,14 @@ async function Item({ id, index }: { id: number, index: number }) {
         </Link>
         <span>
           (
-            <Link style={{ color: "black" }} href={`https://news.ycombinator.com/from?site=${story.domain}`}>
-              {story.domain}
-            </Link>
+          <Link style={{ color: "black" }} href={website}>
+            {story.domain}
+          </Link>
           )
         </span>
       </div>
       <div>
-        <span>{story.score} points by <Link href={`https://news.ycombinator.com/user?id=${story.by}`} style={{ color: "black" }}>{story.by}</Link> at {story.time} | <Link href={`https://news.ycombinator.com/item?id=${id}`} style={{ color: "black" }}>{story.numOfComments} comments</Link></span>
+        <span>{story.score} points by <Link href={userUrl} style={{ color: "black" }}>{story.by}</Link> at <Time timestamp={story.time} /> | <Link href={itemUrl} style={{ color: "black" }}>{story.numOfComments} comments</Link></span>
       </div>
     </div>
   )
