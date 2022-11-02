@@ -4,13 +4,12 @@ import { getTopStories } from "../lib/getTopStories";
 
 export default async function Page() {
 
-  const data = await getTopStories()
-  const initial = data.slice(0, 10)
+  const stories = await getTopStories()
 
   return (
     <main>
       {
-        initial.map((id, index) => (
+        stories.map((id, index) => (
           <Item key={id} id={id} index={index} />
         ))
       }

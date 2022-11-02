@@ -13,7 +13,9 @@ type Response = {
 };
 
 export async function getStory(id: number) {
-  const res = await fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`);
+  const url = `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+  // cache for 1 minute
+  const res = await fetch(url, { next: { revalidate: 60 } });
   const story = await res.json() as Response
 
   const numOfComments = (story.kids ?? []).length
